@@ -48,7 +48,6 @@ style_mono_accent(base_color = "#006400",
 ```
 
 <!-- 
-0.事前に環境構築のドキュメントを送る（dockerとローカル） 国里
 1.再現可能な解析や論文執筆とは？（コピペダメゼッタイ）10分　国里
 2.RStudioとRmarkdown(さらにはTeX)環境を整える（0の内容について，WinとMacの実演動画を流す，解説，Q&A）10分　国里
 3.Rmarkdownで論文を書いてみよう！raticleパッケージのテンプレートで簡単に体験してもらう(パッケージの概要とまずはKnitして感動を共有する，あとはTipsを)。30分　竹林さん
@@ -56,9 +55,114 @@ style_mono_accent(base_color = "#006400",
 5.スライドも本もウェブサイトも作れるぞ！！！10分　竹林さん
 -->
 
+# 心理学の再現性の危機
+- 心理学研究100本のうち再現されたのは39本(Open Science Collaboration, 2016, Science)
+- 引用数が多く効果があるとされた臨床医学研究45本のうち再現されたのは20本(Ioannidis, 2005, JAMA)
+- 1576名の調査から，70%が他の研究者の研究を再現できず，50%が自分の研究の再現もできなかった(Baker, 2016, Nature)
+
+→心理学の研究は再現性がない。心理学の知見を信じていいの？
 ---
+
+# ３つの再現性(Goodman et al., 2016)
+
+1.方法の再現可能性: 論文と同じデータに同じ方法を用いて，同じ結果が得られること
+
+2.結果の再現可能性: 新規のデータに同じ方法を用いて，同じ結果が得られること
+
+3.推論の再現可能性: 結果から質的に同じ結論が得られること
+
+---
+
+# 方法の再現可能性を低める現状の課題１
+
+- 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
+
+→同じデータが難しい・・・
+
+- 2000-2014年の生物医学論文のうち生データが直接利用可能なのは441本中0本だった(Iqbal et al., 2016)
+- 2015-2017年に出版された生物医学論文のうちデータの入手可能性を記載していたのは，たった18.3%(Wallach et al., 2018)
+
+→データが無ければそもそも不可能・・・
+---
+# 方法の再現可能性を低める現状の課題2
+- 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
+
+→同じ方法が難しい・・・
+
+- Science誌掲載論文では，データとコードの共有していた研究が44%，そのうち再現できたのは26%(Stodden et al, 2018)
+- Cognition誌掲載論文では，35本中再現できたのは22本(その内11本は再現するのに著者の協力が必要, Hardwicke et al., 2018)。
+
+→データもコードもあっても再現できない・・・
+
+---
+# 方法の再現可能性を高める方法1
+- 第３者が利用できるようにデータを共有する
+- ヒトから収集したデータを共有する場合は，データ共有に対する同意も必要になる（倫理審査の段階から意識する必要がある）。
+- 第三者が利用できるように，機械が読みやすく人も理解しやすい形式で配布(tidy data)
+- コードは第三者が読むことを考えて，その分野で馴染みのある書き方にする(Rの場合は，The tidyverse style guide https://style.tidyverse.org/)
+- 個人が特定できないように工夫(個人識別情報を含んでなくても特定できることがある)
+---
+# 方法の再現可能性を高める方法2
+- 生データ(少なくとも公開データ)から最終的な結果までが追跡できるようにコードとドキュメントを用意する(手動の作業を減らす)。
+- 第三者が追跡できるように，実行するコードの順番や説明を入れたり，データがどこにあるか分かりやすいように配置する。
+- やり方に決まりはないけど，最近はソフトのパッケージ化を意識した整理法が注目されつつある(Research Compendium)。
+---
+
+# 方法の再現可能性を高める方法3
+- データ解析フロー
+
+<img src="fig/workflow.png" width="650">
+---
+# 方法の再現可能性を高める方法4
+- Research Compendiumの例
+
+<img src="fig/rc.png" width="700">
+---
+
+# 方法の再現可能性を高める方法5
+- 解析環境が違うと結果が再現できないこともある
+- パッケージの開発が活発だとバージョンが違うと，結果が再現できないことがある。
+- 解析環境(OSやソフト)が違うとそもそも実行もできないor結果が再現できないことがある。
+- コードだけでなく，解析環境やバージョン情報も公開する。
+Dockerを使ってOSやソフトを含んだコンテナを共有する。
+---
+
+# Dockerとは？
+- OSに依存せずに，Linuxベースのアプリケーションをコンテナ化する技術。Dockerではコンテナのイメージをつくるが，これを共有すれば，再現可能な環境を共有できる。
+
+<img src="fig/docker.png" width="550">
+---
+
+# どうやってDockerイメージをつくる？
+- Dockerfileを自分で定義すれば，イメージのビルドはできる（つまり，好きなように自作可能）。
+- ただ，自作はなかなかハードルが高いので，Docker Hub(https://hub.docker.com/ )で公開されているビルド済みのイメージを使うのが良いかと思います。
+
+---
+# Rを用いた再現可能な解析について
+- 解析環境は整ったので，方法の再現可能性を高めるために，GitHubとRMarkdownを使って論文を書いてみましょう！
+- 方法の再現可能性について振り返ってから，GitHubとRMarkdownを使った演習を行います。
+---
+
+#　GitHubアカウントを作ろう！
+
+- 以下を参考にして，GitHubアカウントの作成とプライベートリポジトリの作成をしてみましょう
+
+https://kunisatolab.github.io/main/how-to-github.html
+
+---
+
+# まとめ
+- 方法の再現可能性を高めるには，再現可能な解析環境を用意した上で，生データからそのまま論文までを処理できるRmarkdownを使うのが良い。
+
+- コードもフォルダ構成も共有を前提として準備する。
+
+- 再現可能な解析のために，GitHubとRmarkdownを組みわせて作業しよう！
+
+---
+
 # 1.再現可能な解析や論文執筆とは？
 
+---
 ---
 # 2.RStudioとRmarkdown環境を整える
 
@@ -66,4 +170,16 @@ style_mono_accent(base_color = "#006400",
 ---
 # 4.Rmarkdownで日本語論文を書いてみよう！
 
+---
+# 引用文献
+.small[
+- Baker, M. (2016). 1,500 scientists lift the lid on reproducibility. Nature, 533(7604), 452–454.
+- Goodman, S. N., Fanelli, D., & Ioannidis, J. P. A. (2016). What does research reproducibility mean? Science Translational Medicine, 8(341), 341ps12.
+- Hardwicke, T. E., Mathur, M. B., MacDonald, K., Nilsonne, G., Banks, G. C., Kidwell, M. C., Hofelich Mohr, A., Clayton, E., Yoon, E. J., Henry Tessler, M., Lenne, R. L., Altman, S., Long, B., & Frank, M. C. (2018). Data availability, reusability, and analytic reproducibility: evaluating the impact of a mandatory open data policy at the journal Cognition. Royal Society Open Science, 5(8), 180448.
+- Iqbal, S. A., Wallach, J. D., Khoury, M. J., Schully, S. D., & Ioannidis, J. P. A. (2016). Reproducible Research Practices and Transparency across the Biomedical Literature. PLoS Biology, 14(1), e1002333.
+- Ioannidis, J. P. A. (2005). Contradicted and initially stronger effects in highly cited clinical research. JAMA: The Journal of the American Medical Association, 294(2), 218–228.
+- Open Science Collaboration. (2015). Estimating the reproducibility of psychological science. Science, 349(6251), aac4716.
+- Stodden, V., Seiler, J., & Ma, Z. (2018). An empirical analysis of journal policy effectiveness for computational reproducibility. Proceedings of the National Academy of Sciences of the United States of America, 115(11), 2584–2589.
+- Wallach, J. D., Boyack, K. W., & Ioannidis, J. P. A. (2018). Reproducible research practices, transparency, and open access data in the biomedical literature, 2015-2017. PLoS Biology, 16(11), e2006930.
+]
  
