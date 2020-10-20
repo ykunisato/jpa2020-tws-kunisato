@@ -267,6 +267,9 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 .med {
   font-size: 80%;
 }
+.large {
+  font-size: 140%;
+}
 .full-width {
   display: flex;
   width: 100%;
