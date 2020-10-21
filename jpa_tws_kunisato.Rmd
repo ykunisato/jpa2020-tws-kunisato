@@ -90,7 +90,7 @@ class: center, middle
 
 ---
 
-# なぜ？方法の再現可能性低い？１
+# なぜ？方法の再現可能性低い？
 
 - 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
 
@@ -101,7 +101,7 @@ class: center, middle
 
 →データが無ければそもそも不可能・・・
 ---
-# なぜ？方法の再現可能性低い？２
+# なぜ？方法の再現可能性低い？
 
 - 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
 
@@ -158,12 +158,25 @@ class: center, middle
 3.データから論文出版までを一気につなぐ = Rstudio, R Markdown, github, osfr
 
 4.解析環境をまるごと共有する = Docker, renv
-
 ---
+
+
+
+
+
 class: center, middle
 # 2.RStudioとRmarkdown環境を整える
----
 
+---
+# 解析環境を整える
+
+- 統計解析環境の構築では，RとRStudioをおすすめします（フリー，慣れると難しくない，高機能，かいゆいところに手が届く変態的パッケージが山のようにある）。
+- Rは[The R Project for Statistical Computing](https://www.r-project.org/)，Rstudioは[RStudio社のHP](https://rstudio.com/products/rstudio/)からデスクトップ版をダウンロード＆インストールできる。
+
+→ どちらも難しいことではないが，(1)Rstanとかちょっと入れるのにトラブりがちなパッケージを用意するのはまあまあ大変，(2)複数のパソコンで完全に同じ環境を整えるのは難しい，(3)純粋にめんどくさい
+
+
+---
 # Dockerとは？
 - OSに依存せずに，Linuxベースのアプリケーションをコンテナ化する技術。Dockerではコンテナのイメージをつくるが，これを共有すれば，再現可能な環境を共有できる。
 
@@ -198,8 +211,22 @@ https://kunisatolab.github.io/main/how-to-github.html
 class: left, middle
 # 4.Rmarkdownで日本語論文を書いてみよう！
 ---
+# jpaRmdパッケージ
 
-<img src="fig/boss.png" width="350">
+- rstudioのrticlesは便利なのですが，日本の心理学系の雑誌には対応していない。
+
+- jpaRmd(https://github.com/ykunisato/jpaRmd )パッケージを作りました(正確に言うとRMarkdownテンプレートの配布用パッケージ)。
+
+---
+class: center
+
+学科長公認変態的Rパッケージ
+
+<img src="fig/boss.png" width="750">
+
+--
+<img src="fig/boss2.png" width="750">
+
 ---
 # jpaRmdをインストールする
 
