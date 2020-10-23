@@ -160,10 +160,6 @@ class: center, middle
 4.解析環境をまるごと共有する = Docker, renv
 ---
 
-
-
-
-
 class: center, middle
 # 2.RStudioとRmarkdown環境を整える
 
@@ -293,45 +289,211 @@ remotes::install_github("ykunisato/jpaRmd")
 ```
 ---
 # jpaRmdの使用法
-RStudioの「File」 -> 「New File」 -> 「R Markdown…」 
 
-<img src="fig/jparmd1.png" width="600">
+<img src="fig/jparmd1.png" width="600" align="right">
+- File ->
+
+- New File」 -> 
+
+- RMarkdown…
+
+---
+
+<img src="fig/jparmd2.png" width="570"  align="right">
+- From Template ->
+- Japanese Psychological Association format{jpaRmd}をクリックでOK
+- Nameを好きな名前にする。
+
+---
+# knit
+<img src="fig/jparmd3.png" width="570" align="right">
+フォルダが作成されいくつかのファイルとが配置されます。Rmdファイルが自動に開くので，knitをしてみます。
+---
+<img src="fig/jparmd6.png" width="470" align="right">
+- こんな感じのPDFが出てきたら成功です
+
+- 最初はtexのパッケージのインストールがあるので，数分かかります
 
 ---
 
-「From Template」->「Japanese Psychological Association format{jpaRmd}」をクリックして，OK
-
-<img src="fig/jparmd2.png" width="530">
-
+# 日本語のためにスペルチェックをオフ
+<img src="fig/jparmd4.png" width="530" align="right">
+- 最近のRStudioのスペルチェック機能は日本語を使う場合は不便（英語は便利），
+- Tools -> Global Options...
+- 赤点線で囲われたチェックボックスのチェックを.red[取る]
 ---
-# 
-
-<img src="fig/jparmd3.png" width="530">
+# 日本語入力のための工夫
+<img src="fig/jparmd5.png" width="580" align="right">
+- 今のRStudioでは，１つ目に開いたファイルでは日本語入力ができない呪いがある。
+- 理由は不明
+- かっこいい解決法はないので，日本語を入力するファイルの前になにか適当なファイルを開いておいて（例の場合はmemo.md），日本語入力する。
 ---
-# 日本語入力のために
+# jpaRmdでResearch Compendium
 
-「Tools」 -> 「Global Options...」
+- set_rc_jpa()関数を使えば，『心理学研究』用のRmdや解析，データを配置するフォルダなども準備される。
 
-<img src="fig/jparmd4.png" width="530">
----
+- set_rc_jpa()の引数にプロジェクト名を入れて実行（これがディレクトリ名になる）。
 
-<img src="fig/jparmd5.png" width="530">
----
-# jpaRmdのResearch Compendium関数
-
-Research Compendiumの関数も用意していて，以下のようにset_rc_jpa()関数を使って，引数にプロジェクト名をいれると（なおスペースは避けてください），『心理学研究』用のRmdや解析，データを配置するフォルダなども準備されます。
-
+```
 library(jpaRmd)
 set_rc_jpa("rmarkdown_for_reproducibility")
-上記を実行すると“rmarkdown_for_reproducibility”という名前のディレクトリーの下に以下の下位ディレクトリーができます。paperディでクトリ内のpaper.Rmdを開いて，Knitを押してください。PDFが生成されます。
+```
+---
 
-analysis: 分析用ファイルを置く場所
-data：　データを置く場所
-function：　分析で使う汎用関数を定義したりした場合にそのファイルを置く場所
-materials：　研究で使ったマテリアルを置く場所
-paper：　論文原稿を置く場所
-README.md
+# jpaRmdのResearch Compendium
 
+set_rc_jpa("プロジェクト名")を実行すると，プロジェクト名のディレクトリーの下に下位ディレクトリーが作られる。
+
+- analysis: 分析用ファイルを置く場所
+- data：データを置く場所
+- function：　分析で使う汎用関数のファイルを置く場所
+- materials：　研究で使ったマテリアルを置く場所
+- paper：　論文原稿を置く場所
+- README.md
+---
+class: left, middle
+# jpaRmdで自分の論文を書いてみよう！
+---
+
+<img src="fig/jparmd7.png" width="650" align="right">
+title, subtitle, Abstract, Key wordsを自分用に変更する。
+
+原稿には著者名・所属は不要だが，投稿時には必要
+---
+<img src="fig/jparmd8.png" width="800">
+
+最初に使用するRパッケージをlibrary()関数で読み込む。
+
+その下から本文を書き始める。
+
+---
+<img src="fig/jparmd9.png" width="800">
+PaperpileとCiNiiのDemo
+---
+<img src="fig/jparmd10.png" width="600">
+
+ちょっと不満もあるが，いい感じで引用できる。
+---
+<img src="fig/jparmd11.png" width="750">
+『心理学研究』は，25字*32行で800字なので（あと余白は3.5cm以上），そうなるように調整した。これは確認用。
+---
+<img src="fig/jparmd12.png" width="320" align="right">
+25字*32行の800字で１ページが構成されることを確認（ご自身の環境においても再現できるか確認ください。Dockerなので再現できるはずですが・・・）
+---
+<img src="fig/jparmd13.png" width="800">
+
+- "#"は，方法，結果，考察などの大見出し
+- "##"は，参加者や研究手続きなどの中見出し
+- "**"で挟むと太字になるので，それで小見出しを表現できる
+
+---
+<img src="fig/jparmd14.png" width="600">
+
+- R Markdownの大見出し，中見出しに対応して，PDFが出力される（この調整は地味に大変だった）。
+---
+<img src="fig/jparmd15.png" width="650" align="right">
+
+論文内で数値のタイピングとコピペをしない
+
+学生の論文や査読でも，数字が合わないような状況はよくある
+
+r sprintf('%.0f',本文にいれる数値のオブジェクト)で，Rでデータをひっぱてきて本文に挿入する
+---
+<img src="fig/jparmd14.png" width="600">
+
+- こんな感じで，数値が挿入される。データが変わると，それに合わせて，本文も書き換わる。
+---
+<img src="fig/jparmd17.png" width="600">
+
+- 結果も数値もタイピングとコピペをしない。
+- FigureやTableの挿入位置を指定したい場合，”\marginpar{\fbox{Table1}}”を使う。
+---
+<img src="fig/jparmd16.png" width="600">
+
+こんな感じで余白に挿入位置の指定がはいる（結構色々と試して，これが一番『心理学研究』に近かった）。
+---
+<img src="fig/jparmd18.png" width="800">
+
+- 引用文献をいれたいところで，divで囲われた呪文を追加
+- 脚注は自動ではないので（自動にすると本文のそのページに脚注が入っちゃう），引用文献の後ろに書き込む。
+---
+<img src="fig/jparmd19.png" width="700">
+- Rで表のデータを作って，kable()でlatex形式の表を出力
+---
+<img src="fig/jparmd20.png" width="800">
+
+- いい感じですね。
+- LaTeX形式の表を出力すると，自動でTable1から連番が振られます。
+
+---
+画像ファイルの挿入は以下のようにする。[]内に図のタイトルを書く。今回はRmdと同じ位置にあるfig1.pngを挿入しているが，場所を指定すれば他のフォルダのファイルも挿入可能。
+```
+![How R Markdown works](fig1.png)
+```
+
+PDFでは以下のように出力される。Table同様，図はFigure1のように連番がつく。
+
+<img src="fig/jparmd21.png" width="750">
+---
+
+# Rのggplotを挿入する
+
+- R Markdownのチャンクを{r figs, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7,fig.height=4,fig.cap="\\label{fig:figs}Examples of bar plot and scatter plot "}のようにする（サイズやlabelのExample以降は変更ください）。
+
+```
+# 相関係数の算出で使ったと同じデータを使う
+summary_bfi_fig2 <- summary_bfi_fig %>% 
+   mutate(gender = ifelse(gender=="1", 
+   "Male","Female"))
+p1 <- ggplot(summary_bfi_fig2,　#以降省略
+```
+
+---
+
+jtoolsパッケージのtheme_apa()を使うとAPA形式の図を出してくれます。p1の方の棒グラフは，長いので省略しますが，例のようにしていただくと論文風の棒グラフになります。
+
+```
+p2 <- ggplot(summary_bfi_fig2,aes(x = Extraversion, y = Neuroticism)) +
+   geom_point() +
+   theme_apa()
+```
+---
+
+<img src="fig/jparmd22.png" width="700">
+
+- 論文っぽい図が描けました。ggplotが使えるのでさらに魅力的な可視化も可能です。
+---
+# 本文はともかく図表の挿入が面倒・・・
+
+- 論文内の数値のミスは，致命的。
+- コピペ汚染をできるだけ避けるために，図表の数値をRで直接操作し，それを論文に挿入できるのが理想。
+
+---
+# 未解決の問題
+
+- 引用文献はインデントできてない・・・
+- 日本語文献は適切な順番で並ばない・・・
+- APAフォーマットと微妙に違うので（特に日本語），正確にはフォーマットが違う
+
+→面倒だがPDF出力してからTeXファイルをいじって，以下を実行する（美しくない・・・）
+
+```
+xelatex("TeXファイル名.tex")
+```
+→TeXやPandocに詳しい方は，jpaRmdの開発にご協力を！
+---
+# 積極的に機械に合わせていく・・・
+
+- 日本心理学会の日本語文献のフォーマットがAPAそのままでないのがややこしい原因ではないか？
+- R Markdown側の工夫も必要だが，同時に人が読みやすく機械が出力しやすいフォーマットの模索も必要ではないか？
+
+#　jpaRmdついての質問タイム
+
+- jpaRmdはちゃんと動作していますか？
+
+- 『心理学研究』への投稿において足りてない点はないでしょうか？
+
+---
 
 ---
 # 引用文献
