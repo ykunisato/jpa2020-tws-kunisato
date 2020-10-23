@@ -265,10 +265,10 @@ class: center
 
 学科長公認変態的Rパッケージ
 
-<img src="fig/boss.png" width="750">
+<img src="fig/boss.png" width="730">
 
 --
-<img src="fig/boss2.png" width="750">
+<img src="fig/boss2.png" width="730">
 ---
 # 専修大学心理学科卒論用Rmd
 
@@ -487,6 +487,7 @@ xelatex("TeXファイル名.tex")
 - 日本心理学会の日本語文献のフォーマットがAPAそのままでないのがややこしい原因ではないか？
 - R Markdown側の工夫も必要だが，同時に人が読みやすく機械が出力しやすいフォーマットの模索も必要ではないか？
 
+---
 #　jpaRmdついての質問タイム
 
 - jpaRmdはちゃんと動作していますか？
