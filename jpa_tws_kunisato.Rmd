@@ -306,7 +306,16 @@ RStudioの「File」 -> 「New File」 -> 「R Markdown…」
 ---
 # 
 
+<img src="fig/jparmd3.png" width="530">
+---
+# 日本語入力のために
 
+「Tools」 -> 「Global Options...」
+
+<img src="fig/jparmd4.png" width="530">
+---
+
+<img src="fig/jparmd5.png" width="530">
 ---
 # jpaRmdのResearch Compendium関数
 
