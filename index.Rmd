@@ -267,7 +267,6 @@ class: center
 
 <img src="fig/boss.png" width="730">
 
---
 
 <img src="fig/boss2.png" width="730">
 ---
