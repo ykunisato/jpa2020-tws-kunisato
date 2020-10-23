@@ -161,47 +161,83 @@ class: center, middle
 - Dockerfileを自分で定義すれば，イメージのビルドはできる（つまり，好きなように自作可能）。
 - ただ，自作にはLinuxの知識が要求されるので，なかなかハードルが高い（といってもググるだけではあるけど...）
 
-→　Docker Hub(https://hub.docker.com/ )で公開されているビルド済みのイメージを使ってお手軽に環境構築しましょう！
+→　Docker Hub(https://registry.hub.docker.com/u/rocker )で公開されているビルド済みのイメージを使ってお手軽に環境構築しましょう！
 
 ---
+
 # The Rocker Project
 
-https://www.rocker-project.org/
+Docker hub(https://hub.docker.com/u/rocker )で公開
+- r-ver : 生RのDocker
+- rstudio	: rstudioを追加したもの
+- tidyverse	: tidyverseとdevtoolsを追加したもの		
+- verse	: TeXと出版関連パッケージを追加したもの
+- geospatial : verseにgeospatialを追加		
+- shiny	: r-verにshiny serverを追加
+- shiny-verse	: shinyにtidyverseを追加
+- binder : geospatialをmybinder.orgで動かす用	
+- ml : tidyverseにpythonとTensorflowを追加		
+- ml-verse : verseにpythonとTensorflowを追加
 
 ---
+
 # Rockerの仕組み
 
-サーバーとして使う仕組みを説明する
+パソコン内にコンテナを用意して，rstudioサーバーを動かす。ブラウザからRsutidoサーバーにアクセス。フォルダをマウント
+
+&lt;img src="fig/docker2.png" width="800"&gt;
 
 ---
+
+# 論文執筆に便利なDocker
+- ykunisato/paper-rは，RstudioでR Markdownを用いて論文執筆を行う際に便利なパッケージやアドインを含めたDockerファイルのリポジトリ (https://hub.docker.com/r/ykunisato/paper-r )
+
+- ykunisato/paper-rは，rocker/verseをベースにして，各種Rmarkdownで使うパッケージやアドインはもちろん心理学で使いそうなRパッケージは大体入っている（Rstanも最初から入っている）。
+
+---
+
+# Rockerの使い方
+
+- Dockerのインストール（事前準備動画を参照ください）
+- ターミナル(Mac)・コマンドプロンプト(Win)で以下を実行
+
+&lt; Windows &gt;
+
+docker run -e PASSWORD=paper -p 8787:8787 -v "%cd%":/home/rstudio -d --name paper ykunisato/paper-r
+
+&lt; Mac &gt;
+
+docker run -e PASSWORD=paper -e DISABLE_AUTH=true -p 8787:8787 -v $PWD:/home/rstudio -d --name paper ykunisato/paper-r
+
+---
+
 # Rを用いた再現可能な解析について
-- 解析環境は整ったので，方法の再現可能性を高めるために，GitHubとRMarkdownを使って論文を書いてみましょう！
-- 方法の再現可能性について振り返ってから，GitHubとRMarkdownを使った演習を行います。
----
 
-#　GitHubアカウントを作ろう！
+- 解析環境は整ったので，以降ではRMarkdownを使って英語論文と日本語論文を書いてみましょう！
+- Githubを活用するとバージョン管理も可能になります( https://kunisatolab.github.io/main/how-to-github.html )
 
-- 以下を参考にして，GitHubアカウントの作成とプライベートリポジトリの作成をしてみましょう
-
-https://kunisatolab.github.io/main/how-to-github.html
+&lt;img src="fig/github.png" width="500"&gt;
 
 ---
-# まとめ
-- 方法の再現可能性を高めるには，再現可能な解析環境を用意した上で，生データからそのまま論文までを処理できるRmarkdownを使うのが良い。
 
-- コードもフォルダ構成も共有を前提として準備する。
+# 事前準備ついての質問タイム
 
-- 再現可能な解析のために，GitHubとRmarkdownを組みわせて作業しよう！
+- Dockerで解析環境の構築はできましたか？
 
+- Dockerにこだわりすぎる必要はないので，RやRstudioをインストールしてみましょう。
 ---
+
 class: left, middle
 # 4.Rmarkdownで日本語論文を書いてみよう！
 ---
+
 # jpaRmdパッケージ
 
-- rstudioのrticlesは便利なのですが，日本の心理学系の雑誌には対応していない。
+- rstudioのrticlesは便利だが，日本の心理学系の雑誌には対応していない。
 
-- jpaRmd(https://github.com/ykunisato/jpaRmd )パッケージを作りました(正確に言うとRMarkdownテンプレートの配布用パッケージ)。
+- jpaRmd(https://github.com/ykunisato/jpaRmd )パッケージを急ぎ開発（急いだのはギリギリまでサボっただけ）
+
+- jpaRmdは，「心理学研究」の投稿時に求められる書式をPDFで出力するRMarkdownのテンプレートを提供するRパッケージ
 
 ---
 class: center
@@ -212,20 +248,39 @@ class: center
 
 --
 &lt;img src="fig/boss2.png" width="750"&gt;
+---
+# 専修大学心理学科卒論用Rmd
+
+- senshuRmd(https://github.com/ykunisato/senshuRmd )は，専修大学の心理学科で求められる形式の論文をPDF出力するRMarkdownのテンプレートを提供するRパッケージ
+
+- ゼミ生の書式チェックと卒論提出後にゼミ論集を作る時にLaTeXを使うのが嫌になったのが，開発の動機。
+
+- 卒論が始まったら，ゼミのRstudioサーバーにゼミ生のアカウントをつくって，そこにこのRmdをおいておいて，随時ゼミで管理するGithubでバージョン管理している（PDFで出力されるので，それを見て確認したり，実際にゼミ中に操作する）。
 
 ---
-# jpaRmdをインストールする
+# jpaRmdのインストール
 
-https://github.com/ykunisato/jpaRmd
+- jpaRmdは，githubからremotesのinstall_github()関数を用いてインストールできます(cranには登録されていない)。
 
 ```
 # install.packages("remotes")
 remotes::install_github("ykunisato/jpaRmd")
 ```
-
 ---
 # jpaRmdの使用法
-RStudioで，「File」 -&gt; 「New File」 -&gt; 「R Markdown…」 をクリックする。以下の画面がでてきたら，「From Template」から「Japanese Psychological Association format{jpaRmd}」を選んで，OKをクリックする。開かれた.RmdファイルをKnitください。
+RStudioの「File」 -&gt; 「New File」 -&gt; 「R Markdown…」 
+
+&lt;img src="fig/jparmd1.png" width="600"&gt;
+
+---
+
+「From Template」-&gt;「Japanese Psychological Association format{jpaRmd}」をクリックして，OK
+
+&lt;img src="fig/jparmd2.png" width="530"&gt;
+
+---
+# 
+
 
 ---
 # jpaRmdのResearch Compendium関数
