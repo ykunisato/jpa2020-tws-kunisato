@@ -179,16 +179,15 @@ class: center, middle
 ---
 
 # どうやってDockerイメージをつくる？
-- Dockerfileを自分で定義すれば，イメージのビルドはできる（つまり，好きなように自作可能）。
-- ただ，自作にはLinuxの知識が要求されるので，なかなかハードルが高い（といってもググるだけではあるけど...）
+- Dockerfileを自分で定義すれば，オリジナルのイメージが作れる。
+- ただ，自作にはLinuxの知識が要求されるので，なかなかハードルが高い（ググるだけではあるけど...）
 
-→　Docker Hub(https://registry.hub.docker.com/u/rocker )で公開されているビルド済みのイメージを使ってお手軽に環境構築しましょう！
+→　Docker Hub(https://registry.hub.docker.com/u/rocker )で公開されているビルド済みのイメージを使って，お手軽に環境構築しましょう！
 
 ---
 
-# The Rocker Project
+### The Rocker Project(https://hub.docker.com/u/rocker )
 
-Docker hub(https://hub.docker.com/u/rocker )で公開
 - r-ver : 生RのDocker
 - rstudio	: rstudioを追加したもの
 - tidyverse	: tidyverseとdevtoolsを追加したもの		
@@ -256,105 +255,117 @@ class: left, middle
 
 - rstudioのrticlesは便利だが，日本の心理学系の雑誌には対応していない。
 
-- jpaRmd(https://github.com/ykunisato/jpaRmd )パッケージを急ぎ開発（急いだのはギリギリまでサボっただけ）
+- jpaRmd(https://github.com/ykunisato/jpaRmd )パッケージを自作！（ないなら作る！）
 
 - jpaRmdは，「心理学研究」の投稿時に求められる書式をPDFで出力するRMarkdownのテンプレートを提供するRパッケージ
 
 ---
 class: center
 
-学科長公認変態的Rパッケージ
+# 学科長公認変態的Rパッケージ
 
-<img src="fig/boss.png" width="650">
+<img src="fig/boss1.png" width="600">
 
 ---
 class: center
 
-学科長公認変態的Rパッケージ
+# 学科長公認変態的Rパッケージ
 
-<img src="fig/boss2.png" width="650">
+<img src="fig/boss2.png" width="600">
 
 ---
-# 専修大学心理学科卒論用Rmd
+# [脱線]専修大学心理学科卒論用Rmd
 
-- senshuRmd(https://github.com/ykunisato/senshuRmd )は，専修大学の心理学科で求められる形式の論文をPDF出力するRMarkdownのテンプレートを提供するRパッケージ
+- senshuRmd(https://github.com/ykunisato/senshuRmd )は，専修大学の心理学科の卒論で求められる形式のPDF出力するRMarkdownテンプレート用Rパッケージ
 
-- ゼミ生の書式チェックと卒論提出後にゼミ論集を作る時にLaTeXを使うのが嫌になったのが，開発の動機。
+- 開発動機：ゼミ生の書式チェックと卒論提出後にゼミ論集を作る時にLaTeXを教える＆自分が使うのが嫌になった
 
-- 卒論が始まったら，ゼミのRstudioサーバーにゼミ生のアカウントをつくって，そこにこのRmdをおいておいて，随時ゼミで管理するGithubでバージョン管理している（PDFで出力されるので，それを見て確認したり，実際にゼミ中に操作する）。
+- ゼミのRstudioサーバーにゼミ生のアカウントをつくって，ゼミ生はこのRmdを更新＆Githubでバージョン管理（出力されたPDFを確認したり，実際にゼミ中に操作する）
 
+- 作成から１年経つが利用しているのは，弊研究室のみ...
 ---
 # jpaRmdのインストール
 
-- jpaRmdは，githubからremotesのinstall_github()関数を用いてインストールできます(cranには登録されていない)。
+- jpaRmdは，githubからremotesのinstall_github()関数を用いてインストールする(cranには登録されていない)。
 
-```
+```{r eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("ykunisato/jpaRmd")
+
 ```
+
 ---
 # jpaRmdの使用法
 
 <img src="fig/jparmd1.png" width="600" align="right">
-- File ->
+File →
 
-- New File」 -> 
+New File」 →
 
-- RMarkdown…
+RMarkdown…
 
 ---
 
 <img src="fig/jparmd2.png" width="570"  align="right">
-- From Template ->
-- Japanese Psychological Association format{jpaRmd}をクリックでOK
-- Nameを好きな名前にする。
+From Template →
+
+Japanese Psychological Association format{jpaRmd}をクリックして，OK
+
+Nameを好きな名前にする。
 
 ---
-# knit
+# 初knit
 <img src="fig/jparmd3.png" width="570" align="right">
-フォルダが作成されいくつかのファイルとが配置されます。Rmdファイルが自動に開くので，knitをしてみます。
+フォルダが作成されいくつかのファイルとが配置される。
+
+Rmdファイルが自動に開くので，knitをしてみる。
 ---
 <img src="fig/jparmd6.png" width="470" align="right">
-- こんな感じのPDFが出てきたら成功です
+- こんな感じのPDFが出てきたら成功。
 
-- 最初はtexのパッケージのインストールがあるので，数分かかります
+- 最初はtexのパッケージのインストールがあるので，数分かかる。
 
 ---
-
 # 日本語のためにスペルチェックをオフ
 <img src="fig/jparmd4.png" width="530" align="right">
-- 最近のRStudioのスペルチェック機能は日本語を使う場合は不便（英語は便利），
-- Tools -> Global Options...
-- 赤点線で囲われたチェックボックスのチェックを.red[取る]
+最近のRStudioのスペルチェック機能は日本語入力時には不便（英語は便利）
+
+Tools → Global Options...
+
+赤点線で囲われたチェックボックスのチェックを.red[取る]
 ---
+
 # 日本語入力のための工夫
 <img src="fig/jparmd5.png" width="580" align="right">
-- 今のRStudioでは，１つ目に開いたファイルでは日本語入力ができない呪いがある。
-- 理由は不明
-- かっこいい解決法はないので，日本語を入力するファイルの前になにか適当なファイルを開いておいて（例の場合はmemo.md），日本語入力する。
+
+RStudioのversion 1.3.1093では，１つ目に開いたファイルでは日本語入力ができない呪いがある(理由は不明)
+
+良い解決法はないので，日本語を入力するファイルの前になにか適当なファイルを開いておいて（例の場合はmemo.md），日本語入力する。
 ---
 # jpaRmdでResearch Compendium
 
 - set_rc_jpa()関数を使えば，『心理学研究』用のRmdや解析，データを配置するフォルダなども準備される。
 
-- set_rc_jpa()の引数にプロジェクト名を入れて実行（これがディレクトリ名になる）。
+- set_rc_jpa()の引数にプロジェクト名を入れて実行（これがディレクトリ名になる）
 
-```
+```{r eval=FALSE}
 library(jpaRmd)
 set_rc_jpa("rmarkdown_for_reproducibility")
 ```
+
+
 ---
 
 # jpaRmdのResearch Compendium
 
-set_rc_jpa("プロジェクト名")を実行すると，プロジェクト名のディレクトリーの下に下位ディレクトリーが作られる。
+set_rc_jpa("プロジェクト名")を実行すると，プロジェクト名のディレクトリー下に以下のディレクトリーが作られる。
 
 - analysis: 分析用ファイルを置く場所
 - data：データを置く場所
 - function：　分析で使う汎用関数のファイルを置く場所
 - materials：　研究で使ったマテリアルを置く場所
 - paper：　論文原稿を置く場所
-- README.md
+- README.md : 説明を書くファイル
 ---
 class: left, middle
 # jpaRmdで自分の論文を書いてみよう！
@@ -367,29 +378,32 @@ title, subtitle, Abstract, Key wordsを自分用に変更する。
 ---
 <img src="fig/jparmd8.png" width="800">
 
-最初に使用するRパッケージをlibrary()関数で読み込む。
+- 最初に使用するRパッケージをlibrary()関数で読み込む。
 
-その下から本文を書き始める。
+- その下から本文を書き始める。
 
 ---
 <img src="fig/jparmd9.png" width="800">
-PaperpileとCiNiiのDemo
+- PaperpileやCiNii(日本語文献情報)を利用
 ---
 <img src="fig/jparmd10.png" width="600">
 
 ちょっと不満もあるが，いい感じで引用できる。
 ---
-<img src="fig/jparmd11.png" width="750">
-『心理学研究』は，25字*32行で800字なので（あと余白は3.5cm以上），そうなるように調整した。これは確認用。
+<img src="fig/jparmd11.png" width="700">
+
+『心理学研究』は，25字*32行で1頁800字（余白は3.5cm以上）。その確認用文章。
 ---
 <img src="fig/jparmd12.png" width="320" align="right">
 25字*32行の800字で１ページが構成されることを確認（ご自身の環境においても再現できるか確認ください。Dockerなので再現できるはずですが・・・）
 ---
 <img src="fig/jparmd13.png" width="800">
 
-- "#"は，方法，結果，考察などの大見出し
-- "##"は，参加者や研究手続きなどの中見出し
-- "**"で挟むと太字になるので，それで小見出しを表現できる
+"#"は，方法，結果，考察などの大見出し
+
+"##"は，参加者や研究手続きなどの中見出し
+
+"**"で挟むと太字になるので，それで小見出しを表現できる
 
 ---
 <img src="fig/jparmd14.png" width="600">
@@ -398,24 +412,26 @@ PaperpileとCiNiiのDemo
 ---
 <img src="fig/jparmd15.png" width="650" align="right">
 
-論文内で数値のタイピングとコピペをしない
+論文内で数値の手による打ち込みとコピペをしない
 
 学生の論文や査読でも，数字が合わないような状況はよくある
 
-r sprintf('%.0f',本文にいれる数値のオブジェクト)で，Rでデータをひっぱてきて本文に挿入する
+.red[r sprintf('%.0f',本文にいれる数値のオブジェクト)]で，Rでデータをひっぱてきて本文に挿入する
 ---
 <img src="fig/jparmd14.png" width="600">
 
-- こんな感じで，数値が挿入される。データが変わると，それに合わせて，本文も書き換わる。
+こんな感じで，数値が挿入される。
+
+データが変わると，それに合わせて，本文も書き換わる。
 ---
 <img src="fig/jparmd17.png" width="600">
 
 - 結果も数値もタイピングとコピペをしない。
-- FigureやTableの挿入位置を指定したい場合，”\marginpar{\fbox{Table1}}”を使う。
+- FigureやTableの挿入位置を指定したい場合，.red[”\marginpar{\fbox{Table1}}”]を使う。
 ---
 <img src="fig/jparmd16.png" width="600">
 
-こんな感じで余白に挿入位置の指定がはいる（結構色々と試して，これが一番『心理学研究』に近かった）。
+こんな感じで余白に挿入位置の指定がはいる（色々と試して，これが一番『心理学研究』に近かった）。
 ---
 <img src="fig/jparmd18.png" width="800">
 
@@ -431,21 +447,22 @@ r sprintf('%.0f',本文にいれる数値のオブジェクト)で，Rでデー�
 - LaTeX形式の表を出力すると，自動でTable1から連番が振られます。
 
 ---
-画像ファイルの挿入は以下のようにする。[]内に図のタイトルを書く。今回はRmdと同じ位置にあるfig1.pngを挿入しているが，場所を指定すれば他のフォルダのファイルも挿入可能。
+- 画像ファイルの挿入は以下のようにする。[]内に図のタイトルを書く。今回はRmdと同じ位置にあるfig1.pngを挿入しているが，場所を指定すれば他のフォルダのファイルも挿入可能(例えば，../analysis/result1.pngも可能)。
+
 ```
 ![How R Markdown works](fig1.png)
 ```
 
-PDFでは以下のように出力される。Table同様，図はFigure1のように連番がつく。
+- PDFでは以下のように出力される。Table同様，図はFigure1のように連番がつく。
 
 <img src="fig/jparmd21.png" width="750">
 ---
 
 # Rのggplotを挿入する
 
-- R Markdownのチャンクを{r figs, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7,fig.height=4,fig.cap="\\label{fig:figs}Examples of bar plot and scatter plot "}のようにする（サイズやlabelのExample以降は変更ください）。
+- R Markdownのチャンクを.red[{r figs, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7,fig.height=4,fig.cap="\\label{fig:figs}Examples of bar plot and scatter plot "}]のようにする（fig.width, fig.height, fig.capは適宜変更）。
 
-```
+```{r eval=FALSE}
 # 相関係数の算出で使ったと同じデータを使う
 summary_bfi_fig2 <- summary_bfi_fig %>% 
    mutate(gender = ifelse(gender=="1", 
@@ -453,11 +470,13 @@ summary_bfi_fig2 <- summary_bfi_fig %>%
 p1 <- ggplot(summary_bfi_fig2,　#以降省略
 ```
 
+
 ---
+# ggplotをAPA風にする
 
-jtoolsパッケージのtheme_apa()を使うとAPA形式の図を出してくれます。p1の方の棒グラフは，長いので省略しますが，例のようにしていただくと論文風の棒グラフになります。
+- jtoolsパッケージのtheme_apa()を使うとAPA形式の図を出力できる。p1の方の棒グラフは，長いので省略しますが，以下のようにtheme_apa()を追加すると，論文風の棒グラフになる。
 
-```
+```{r eval=FALSE}
 p2 <- ggplot(summary_bfi_fig2,aes(x = Extraversion, y = Neuroticism)) +
    geom_point() +
    theme_apa()
@@ -466,11 +485,12 @@ p2 <- ggplot(summary_bfi_fig2,aes(x = Extraversion, y = Neuroticism)) +
 
 <img src="fig/jparmd22.png" width="700">
 
-- 論文っぽい図が描けました。ggplotが使えるのでさらに魅力的な可視化も可能です。
+- 論文っぽい図が描けた。ggplotが使えるのでさらに魅力的な可視化も可能。
 ---
 # 本文はともかく図表の挿入が面倒・・・
 
 - 論文内の数値のミスは，致命的。
+
 - コピペ汚染をできるだけ避けるために，図表の数値をRで直接操作し，それを論文に挿入できるのが理想。
 
 ---
@@ -482,7 +502,7 @@ p2 <- ggplot(summary_bfi_fig2,aes(x = Extraversion, y = Neuroticism)) +
 
 →面倒だがPDF出力してからTeXファイルをいじって，以下を実行する（美しくない・・・）
 
-```
+```{r eval=FALSE}
 xelatex("TeXファイル名.tex")
 ```
 →TeXやPandocに詳しい方は，jpaRmdの開発にご協力を！
@@ -490,6 +510,7 @@ xelatex("TeXファイル名.tex")
 # 積極的に機械に合わせていく・・・
 
 - 日本心理学会の日本語文献のフォーマットがAPAそのままでないのがややこしい原因ではないか？
+
 - R Markdown側の工夫も必要だが，同時に人が読みやすく機械が出力しやすいフォーマットの模索も必要ではないか？
 
 ---
@@ -498,8 +519,6 @@ xelatex("TeXファイル名.tex")
 - jpaRmdはちゃんと動作していますか？
 
 - 『心理学研究』への投稿において足りてない点はないでしょうか？
-
----
 
 ---
 # 引用文献
