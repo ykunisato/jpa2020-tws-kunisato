@@ -291,7 +291,6 @@ class: center
 ```{r eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("ykunisato/jpaRmd")
-
 ```
 
 ---
