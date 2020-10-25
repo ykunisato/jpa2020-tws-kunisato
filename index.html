@@ -107,7 +107,7 @@ class: center, middle
 
 - 第３者がわかるようにファイルとフォルダを組織化する。Rのパッケージ開発を意識した整理法が注目されつつある(Research Compendium)。
 
-&lt;img src="fig/rc.png" width="800"&gt;
+&lt;img src="fig/rc.png" width="700"&gt;
 
 ---
 # データから論文出版までを一気につなぐ
@@ -126,7 +126,7 @@ class: center, middle
 ---
 # 方法の再現可能性を高めるツール
 
-1.共有を前提にデータとコードを用意する = The tidyverse style guide,
+1.共有を前提にデータとコードを用意する = The tidyverse style guide
 
 2.ファイルを組織化する(Research Compendium) = jpaRmd, rrtools
 
@@ -141,7 +141,7 @@ class: center, middle
 ---
 # 解析環境を整える
 
-- 統計解析環境の構築では，RとRStudioをおすすめします（フリー，実は難しくない，高機能，便利な変態的パッケージがある）。
+- 統計解析環境の構築では，RとRStudioがおすすめ（フリー，実は難しくない，高機能，便利な変態的パッケージがある）。
 - Rは[The R Project for Statistical Computing](https://www.r-project.org/)，Rstudioは[RStudio社のHP](https://rstudio.com/products/rstudio/)からデスクトップ版をダウンロード＆インストールできる。
 
 デメリット：(1)Rstanなどインストールでトラブりがちなパッケージの用意が面倒，(2)複数のパソコンで完全に同じ環境を整えるのは大変，(3)純粋にめんどくさい
@@ -423,15 +423,17 @@ title, subtitle, Abstract, Key wordsを自分用に変更する。
 - LaTeX形式の表を出力すると，自動でTable1から連番が振られます。
 
 ---
-- 画像ファイルの挿入は以下のようにする。[]内に図のタイトルを書く。今回はRmdと同じ位置にあるfig1.pngを挿入しているが，場所を指定すれば他のフォルダのファイルも挿入可能(例えば，../analysis/result1.pngも可能)。
+- 画像ファイルの挿入は以下のようにする。[]内に図のタイトルを書く。
 
 ```
 ![How R Markdown works](fig1.png)
 ```
 
+.med[※今回はRmdと同じ位置にあるfig1.pngを挿入しているが，場所を指定すれば他のフォルダのファイルも挿入可能(例えば，../analysis/result1.pngも可能)]
+
 - PDFでは以下のように出力される。Table同様，図はFigure1のように連番がつく。
 
-&lt;img src="fig/jparmd21.png" width="750"&gt;
+&lt;img src="fig/jparmd21.png" width="650"&gt;
 ---
 
 # Rのggplotを挿入する
@@ -493,6 +495,17 @@ xelatex("TeXファイル名.tex")
 - R Markdown側の工夫も必要だが，同時に人が読みやすく機械が出力しやすいフォーマットの模索も必要ではないか？
 
 ---
+## R Markdownをさらに極めたい方へ
+.med[
+- ドキュメント・プレゼンテーション生成(高橋康介著,2014年，共立出版)
+- 再現可能性のすゝめ(高橋康介著,2018年，共立出版)
+- 自然科学研究のためのR入門(江口哲史著,2018年，共立出版)
+- RユーザのためのRStudio[実践]入門(松村優哉・湯谷啓明・紀ノ定保礼・前田和寛著，2018年,技術評論社)
+- R Markdown Cookbook (Yihui Xie, Christophe Dervieux, Emily Riederer, 2020年10月30日, Chapman and Hall/CRC
+]
+&lt;img src="fig/book.png" width="800"&gt;
+---
+
 #　jpaRmdついての質問タイム
 
 - jpaRmdはちゃんと動作していますか？
