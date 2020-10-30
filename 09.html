@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>今日からできる再現可能な論文執筆</title>
+    <title>Rmarkdownで日本語論文を書いてみよう！</title>
     <meta charset="utf-8" />
     <meta name="author" content="国里愛彦 (専修大学)" />
-    <meta name="author" content="竹林由武 (福島県立医科大学)" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# 今日からできる再現可能な論文執筆
+# Rmarkdownで日本語論文を書いてみよう！
 ### 国里愛彦 (専修大学)
-### 竹林由武 (福島県立医科大学)
 ### 2020年10月31日
 
 ---
@@ -23,209 +21,17 @@ class: center, middle, inverse, title-slide
 
 
 
-&lt;!-- 
-1.再現可能な解析や論文執筆とは？（コピペダメゼッタイ）15分　国里
-2.RStudioとRmarkdown(さらにはTeX)環境を整える（0の内容について，WinとMacの実演動画を流す，解説，Q&amp;A）15分　国里
-3.Rmarkdownで論文を書いてみよう！raticleパッケージのテンプレートで簡単に体験してもらう(パッケージの概要とまずはKnitして感動を共有する，あとはTipsを)。30分　竹林さん
-4.日本語論文を書いてみよう！30分　国里&lt;TWS用サイトを作る&gt;
-5.スライドも本もウェブサイトも作れるぞ！！！15分　竹林さん
---&gt;
 
 # 今日からできる再現可能な論文執筆
 
 1. 再現可能な解析や論文執筆とは？（15分)
 1. RStudioとRmarkdown環境を整える（15分)
 1. Rmarkdownで英語論文を書いてみよう！(30分)
-1. Rmarkdownで日本語論文を書いてみよう！(30分)
+1. .red[Rmarkdownで日本語論文を書いてみよう！(30分)]
 1. スライドも本もウェブサイトも作れるぞ!(15分)
 1. 質疑
 
 ---
-class: center, middle
-# 1.再現可能な解析や論文執筆とは？
-
----
-# 心理学の再現性の危機
-- 心理学研究100本のうち再現されたのは39本(Open Science Collaboration, 2016, Science)
-- 引用数が多く効果があるとされた臨床医学研究45本のうち再現されたのは20本(Ioannidis, 2005, JAMA)
-- 1576名の調査から，70%が他の研究者の研究を再現できず，50%が自分の研究の再現もできなかった(Baker, 2016, Nature)
-
-→心理学の研究の再現性は低い。心理学の知見を信じていいの？
----
-
-# ３つの再現性(Goodman et al., 2016)
-
-- .large[方法]の再現可能性: 論文と.red[同じデータ]に.red[同じ方法]を用いて，.red[同じ結果]が得られること
-
-- .large[結果]の再現可能性: .red[新規のデータ]に.red[同じ方法]を用いて，.red[同じ結果]が得られること
-
-- .large[推論]の再現可能性: .red[同じ結果]から質的に.red[同じ結論]が得られること
-
-→本TWSの目的は，方法の再現可能性を高めること！
-
----
-
-# なぜ？方法の再現可能性低い？
-
-- 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
-
-→同じデータが難しい・・・
-
-- 2000-2014年の生物医学論文のうち生データが直接利用可能なのは441本中0本だった(Iqbal et al., 2016)
-- 2015-2017年に出版された生物医学論文のうちデータの入手可能性を記載していたのは，たった18.3%(Wallach et al., 2018)
-
-→データが無ければそもそも不可能・・・
----
-# なぜ？方法の再現可能性低い？
-
-- 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
-
-→同じ方法が難しい・・・
-
-- Science誌掲載論文では，データとコードの共有していた研究が44%，そのうち再現できたのは26%(Stodden et al, 2018)
-- Cognition誌掲載論文では，35本中再現できたのは22本(その内11本は再現するのに著者の協力が必要, Hardwicke et al., 2018)。
-
-→データもコードもあっても再現できない・・・
-
----
-# 方法の再現可能性を高める方法
-
-1. 共有を前提にデータとコードを用意する
-1. ファイルを組織化する(Research Compendium)
-1. データから論文出版までを一気につなぐ
-1. 解析環境をまるごと共有する
-
----
-# 共有を前提にデータとコードを用意する
-- 第３者が利用できるように，機械が読みやすく人も理解しやすい形式でデータを配布する(tidy data)
-- ヒトから収集したデータを共有・公開する場合は，データ共有に対する同意も必要になる(倫理審査から準備する)。
-- データから個人が特定できないように工夫する(個人識別情報を含んでなくても特定できることがある)
-- 第３者が利用できるように，解析コードは，その分野で馴染みのある書き方にする(Rの場合は，The tidyverse style guide https://style.tidyverse.org/)
-
----
-# ファイルを組織化する.med[(Research Compendium)]
-
-- 第３者がわかるようにファイルとフォルダを組織化する。Rのパッケージ開発を意識した整理法が注目されつつある(Research Compendium)。
-
-&lt;img src="fig/rc.png" width="700"&gt;
-
----
-# データから論文出版までを一気につなぐ
-- 生データから論文までが追跡できるように用意する
-
-&lt;img src="fig/workflow.png" width="660"&gt;
----
-
-# 解析環境をまるごと共有する
-- パッケージのバージョンが違ったりすると，結果が再現できないことがある。
-- 解析環境(OSやソフト)が違うとそもそも実行ができないor結果が再現できないことがある。
-
-→ コードだけでなく，解析環境やバージョン情報も公開する。
-
-→ Dockerを使ってOSやソフトを含んだコンテナを共有する。
----
-# 方法の再現可能性を高めるツール
-
-1.共有を前提にデータとコードを用意する = The tidyverse style guide
-
-2.ファイルを組織化する(Research Compendium) = jpaRmd, rrtools
-
-3.データから論文出版までを一気につなぐ = Rstudio, R Markdown, github, osfr
-
-4.解析環境をまるごと共有する = Docker, renv
----
-
-class: center, middle
-# 2.RStudioとRmarkdown環境を整える
-
----
-# 解析環境を整える
-
-- 統計解析環境の構築では，RとRStudioがおすすめ（フリー，実は難しくない，高機能，便利な変態的パッケージがある）。
-- Rは[The R Project for Statistical Computing](https://www.r-project.org/)，Rstudioは[RStudio社のHP](https://rstudio.com/products/rstudio/)からデスクトップ版をダウンロード＆インストールできる。
-
-デメリット：(1)Rstanなどインストールでトラブりがちなパッケージの用意が面倒，(2)複数のパソコンで完全に同じ環境を整えるのは大変，(3)純粋にめんどくさい
-
----
-# Dockerとは？
-- OSに依存せずに，Linuxベースのアプリケーションをコンテナ化する技術。Dockerではコンテナのイメージをつくるが，これを共有すれば，再現可能な環境を共有できる。
-
-&lt;img src="fig/docker.png" width="550"&gt;
----
-
-# どうやってDockerイメージをつくる？
-- Dockerfileを自分で定義すれば，オリジナルのイメージが作れる。
-- ただ，自作にはLinuxの知識が要求されるので，なかなかハードルが高い（ググるだけではあるけど...）
-
-→　Docker Hub(https://registry.hub.docker.com/u/rocker )で公開されているビルド済みのイメージを使って，お手軽に環境構築しましょう！
-
----
-
-### The Rocker Project(https://hub.docker.com/u/rocker )
-
-- r-ver : 生RのDocker
-- rstudio	: rstudioを追加したもの
-- tidyverse	: tidyverseとdevtoolsを追加したもの		
-- verse	: TeXと出版関連パッケージを追加したもの
-- geospatial : verseにgeospatialを追加		
-- shiny	: r-verにshiny serverを追加
-- shiny-verse	: shinyにtidyverseを追加
-- binder : geospatialをmybinder.orgで動かす用	
-- ml : tidyverseにpythonとTensorflowを追加		
-- ml-verse : verseにpythonとTensorflowを追加
-
----
-
-# Rockerの仕組み
-
-パソコン内にコンテナを用意して，rstudioサーバーを動かす。ブラウザからRsutidoサーバーにアクセス。フォルダをマウント
-
-&lt;img src="fig/docker2.png" width="800"&gt;
-
----
-
-# 論文執筆に便利なDocker
-- ykunisato/paper-rは，RstudioでR Markdownを用いて論文執筆を行う際に便利なパッケージやアドインを含めたDockerファイルのリポジトリ (https://hub.docker.com/r/ykunisato/paper-r )
-
-- ykunisato/paper-rは，rocker/verseをベースにして，各種Rmarkdownで使うパッケージやアドインはもちろん心理学で使いそうなRパッケージは大体入っている（Rstanも最初から入っている）。
-
----
-
-# Rockerの使い方
-
-- Dockerのインストール（事前準備動画を参照ください）
-- ターミナル(Mac)・コマンドプロンプト(Win)で以下を実行
-
-&lt; Windows &gt;
-
-docker run -e PASSWORD=paper -p 8787:8787 -v "%cd%":/home/rstudio -d --name paper ykunisato/paper-r
-
-&lt; Mac &gt;
-
-docker run -e PASSWORD=paper -e DISABLE_AUTH=true -p 8787:8787 -v $PWD:/home/rstudio -d --name paper ykunisato/paper-r
-
----
-
-# Rを用いた再現可能な解析について
-
-- 解析環境は整ったので，以降ではRMarkdownを使って英語論文と日本語論文を書いてみましょう！
-- Githubを活用するとバージョン管理も可能になります( https://kunisatolab.github.io/main/how-to-github.html )
-
-&lt;img src="fig/github.png" width="500"&gt;
-
----
-
-# 事前準備ついての質問タイム
-
-- Dockerで解析環境の構築はできましたか？
-
-- Dockerにこだわりすぎる必要はないので，RやRstudioをインストールしてみましょう。
----
-
-class: left, middle
-# 4.Rmarkdownで日本語論文を書いてみよう！
----
-
 # jpaRmdパッケージ
 
 - rstudioのrticlesは便利だが，日本の心理学系の雑誌には対応していない。
