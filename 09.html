@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>今日からできる再現可能な論文執筆</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="国里愛彦 (専修大学)" />
+    <meta name="author" content="竹林由武 (福島県立医科大学)" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# 今日からできる再現可能な論文執筆
+### 国里愛彦 (専修大学)
+### 竹林由武 (福島県立医科大学)
+### 2020年10月31日
+
+---
+
+
+
+
+
+
+&lt;!-- 
+1.再現可能な解析や論文執筆とは？（コピペダメゼッタイ）15分　国里
+2.RStudioとRmarkdown(さらにはTeX)環境を整える（0の内容について，WinとMacの実演動画を流す，解説，Q&amp;A）15分　国里
+3.Rmarkdownで論文を書いてみよう！raticleパッケージのテンプレートで簡単に体験してもらう(パッケージの概要とまずはKnitして感動を共有する，あとはTipsを)。30分　竹林さん
+4.日本語論文を書いてみよう！30分　国里&lt;TWS用サイトを作る&gt;
+5.スライドも本もウェブサイトも作れるぞ！！！15分　竹林さん
+--&gt;
+
+# 今日からできる再現可能な論文執筆
+
+1. 再現可能な解析や論文執筆とは？（15分)
+1. RStudioとRmarkdown環境を整える（15分)
+1. Rmarkdownで英語論文を書いてみよう！(30分)
+1. Rmarkdownで日本語論文を書いてみよう！(30分)
+1. スライドも本もウェブサイトも作れるぞ!(15分)
+1. 質疑
+
+---
+class: center, middle
+# 1.再現可能な解析や論文執筆とは？
+
+---
+# 心理学の再現性の危機
+- 心理学研究100本のうち再現されたのは39本(Open Science Collaboration, 2016, Science)
+- 引用数が多く効果があるとされた臨床医学研究45本のうち再現されたのは20本(Ioannidis, 2005, JAMA)
+- 1576名の調査から，70%が他の研究者の研究を再現できず，50%が自分の研究の再現もできなかった(Baker, 2016, Nature)
+
+→心理学の研究の再現性は低い。心理学の知見を信じていいの？
+---
+
+# ３つの再現性(Goodman et al., 2016)
+
+- .large[方法]の再現可能性: 論文と.red[同じデータ]に.red[同じ方法]を用いて，.red[同じ結果]が得られること
+
+- .large[結果]の再現可能性: .red[新規のデータ]に.red[同じ方法]を用いて，.red[同じ結果]が得られること
+
+- .large[推論]の再現可能性: .red[同じ結果]から質的に.red[同じ結論]が得られること
+
+→本TWSの目的は，方法の再現可能性を高めること！
+
+---
+
+# なぜ？方法の再現可能性低い？
+
+- 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
+
+→同じデータが難しい・・・
+
+- 2000-2014年の生物医学論文のうち生データが直接利用可能なのは441本中0本だった(Iqbal et al., 2016)
+- 2015-2017年に出版された生物医学論文のうちデータの入手可能性を記載していたのは，たった18.3%(Wallach et al., 2018)
+
+→データが無ければそもそも不可能・・・
+---
+# なぜ？方法の再現可能性低い？
+
+- 「同じデータ + 同じ方法 = 同じ結果」って，当たり前じゃないの？
+
+→同じ方法が難しい・・・
+
+- Science誌掲載論文では，データとコードの共有していた研究が44%，そのうち再現できたのは26%(Stodden et al, 2018)
+- Cognition誌掲載論文では，35本中再現できたのは22本(その内11本は再現するのに著者の協力が必要, Hardwicke et al., 2018)。
+
+→データもコードもあっても再現できない・・・
+
+---
+# 方法の再現可能性を高める方法
+
+1. 共有を前提にデータとコードを用意する
+1. ファイルを組織化する(Research Compendium)
+1. データから論文出版までを一気につなぐ
+1. 解析環境をまるごと共有する
+
+---
+# 共有を前提にデータとコードを用意する
+- 第３者が利用できるように，機械が読みやすく人も理解しやすい形式でデータを配布する(tidy data)
+- ヒトから収集したデータを共有・公開する場合は，データ共有に対する同意も必要になる(倫理審査から準備する)。
+- データから個人が特定できないように工夫する(個人識別情報を含んでなくても特定できることがある)
+- 第３者が利用できるように，解析コードは，その分野で馴染みのある書き方にする(Rの場合は，The tidyverse style guide https://style.tidyverse.org/)
+
+---
+# ファイルを組織化する.med[(Research Compendium)]
+
+- 第３者がわかるようにファイルとフォルダを組織化する。Rのパッケージ開発を意識した整理法が注目されつつある(Research Compendium)。
+
+&lt;img src="fig/rc.png" width="700"&gt;
+
+---
+# データから論文出版までを一気につなぐ
+- 生データから論文までが追跡できるように用意する
+
+&lt;img src="fig/workflow.png" width="660"&gt;
+---
+
+# 解析環境をまるごと共有する
+- パッケージのバージョンが違ったりすると，結果が再現できないことがある。
+- 解析環境(OSやソフト)が違うとそもそも実行ができないor結果が再現できないことがある。
+
+→ コードだけでなく，解析環境やバージョン情報も公開する。
+
+→ Dockerを使ってOSやソフトを含んだコンテナを共有する。
+---
+# 方法の再現可能性を高めるツール
+
+1.共有を前提にデータとコードを用意する = The tidyverse style guide
+
+2.ファイルを組織化する(Research Compendium) = jpaRmd, rrtools
+
+3.データから論文出版までを一気につなぐ = Rstudio, R Markdown, github, osfr
+
+4.解析環境をまるごと共有する = Docker, renv
+---
+
+class: center, middle
+# 2.RStudioとRmarkdown環境を整える
+
+---
+# 解析環境を整える
+
+- 統計解析環境の構築では，RとRStudioがおすすめ（フリー，実は難しくない，高機能，便利な変態的パッケージがある）。
+- Rは[The R Project for Statistical Computing](https://www.r-project.org/)，Rstudioは[RStudio社のHP](https://rstudio.com/products/rstudio/)からデスクトップ版をダウンロード＆インストールできる。
+
+デメリット：(1)Rstanなどインストールでトラブりがちなパッケージの用意が面倒，(2)複数のパソコンで完全に同じ環境を整えるのは大変，(3)純粋にめんどくさい
+
+---
+# Dockerとは？
+- OSに依存せずに，Linuxベースのアプリケーションをコンテナ化する技術。Dockerではコンテナのイメージをつくるが，これを共有すれば，再現可能な環境を共有できる。
+
+&lt;img src="fig/docker.png" width="550"&gt;
+---
+
+# どうやってDockerイメージをつくる？
+- Dockerfileを自分で定義すれば，オリジナルのイメージが作れる。
+- ただ，自作にはLinuxの知識が要求されるので，なかなかハードルが高い（ググるだけではあるけど...）
+
+→　Docker Hub(https://registry.hub.docker.com/u/rocker )で公開されているビルド済みのイメージを使って，お手軽に環境構築しましょう！
+
+---
+
+### The Rocker Project(https://hub.docker.com/u/rocker )
+
+- r-ver : 生RのDocker
+- rstudio	: rstudioを追加したもの
+- tidyverse	: tidyverseとdevtoolsを追加したもの		
+- verse	: TeXと出版関連パッケージを追加したもの
+- geospatial : verseにgeospatialを追加		
+- shiny	: r-verにshiny serverを追加
+- shiny-verse	: shinyにtidyverseを追加
+- binder : geospatialをmybinder.orgで動かす用	
+- ml : tidyverseにpythonとTensorflowを追加		
+- ml-verse : verseにpythonとTensorflowを追加
+
+---
+
+# Rockerの仕組み
+
+パソコン内にコンテナを用意して，rstudioサーバーを動かす。ブラウザからRsutidoサーバーにアクセス。フォルダをマウント
+
+&lt;img src="fig/docker2.png" width="800"&gt;
+
+---
+
+# 論文執筆に便利なDocker
+- ykunisato/paper-rは，RstudioでR Markdownを用いて論文執筆を行う際に便利なパッケージやアドインを含めたDockerファイルのリポジトリ (https://hub.docker.com/r/ykunisato/paper-r )
+
+- ykunisato/paper-rは，rocker/verseをベースにして，各種Rmarkdownで使うパッケージやアドインはもちろん心理学で使いそうなRパッケージは大体入っている（Rstanも最初から入っている）。
+
+---
+
+# Rockerの使い方
+
+- Dockerのインストール（事前準備動画を参照ください）
+- ターミナル(Mac)・コマンドプロンプト(Win)で以下を実行
+
+&lt; Windows &gt;
+
+docker run -e PASSWORD=paper -p 8787:8787 -v "%cd%":/home/rstudio -d --name paper ykunisato/paper-r
+
+&lt; Mac &gt;
+
+docker run -e PASSWORD=paper -e DISABLE_AUTH=true -p 8787:8787 -v $PWD:/home/rstudio -d --name paper ykunisato/paper-r
+
+---
+
+# Rを用いた再現可能な解析について
+
+- 解析環境は整ったので，以降ではRMarkdownを使って英語論文と日本語論文を書いてみましょう！
+- Githubを活用するとバージョン管理も可能になります( https://kunisatolab.github.io/main/how-to-github.html )
+
+&lt;img src="fig/github.png" width="500"&gt;
+
+---
+
+# 事前準備ついての質問タイム
+
+- Dockerで解析環境の構築はできましたか？
+
+- Dockerにこだわりすぎる必要はないので，RやRstudioをインストールしてみましょう。
+---
+
+class: left, middle
+# 4.Rmarkdownで日本語論文を書いてみよう！
+---
+
+# jpaRmdパッケージ
+
+- rstudioのrticlesは便利だが，日本の心理学系の雑誌には対応していない。
+
+- jpaRmd(https://github.com/ykunisato/jpaRmd )パッケージを自作！（ないなら作る！）
+
+- jpaRmdは，「心理学研究」の投稿時に求められる書式をPDFで出力するRMarkdownのテンプレートを提供するRパッケージ
+
+---
+class: center
+
+# 学科長公認変態的Rパッケージ
+
+&lt;img src="fig/boss1.png" width="600"&gt;
+
+---
+class: center
+
+# 学科長公認変態的Rパッケージ
+
+&lt;img src="fig/boss2.png" width="600"&gt;
+
+---
+# [脱線]専修大学心理学科卒論用Rmd
+
+- senshuRmd(https://github.com/ykunisato/senshuRmd )は，専修大学の心理学科の卒論で求められる形式のPDF出力するRMarkdownテンプレート用Rパッケージ
+
+- ゼミのRstudioサーバーにゼミ生のアカウントをつくって，ゼミ生はこのRmdを更新＆Githubでバージョン管理（出力されたPDFを確認したり，実際にゼミ中に操作する）
+
+- 作成から１年経つが利用しているのは，弊研究室のみ...
+---
+# [脱線]事前登録用Rmdテンプレート
+
+- 卒論でも仮説・方法・解析の事前登録できると良い
+- [AsPredictedテンプレート用Rmdファイル](https://github.com/ykunisato/AsPredicted_Rmd_template)をゼミ生用に自作
+- AsPredicted形式のファイルをGitHubでタイムスタンプ付きで保存すれば簡易の事前登録として使える(もちろんOSFにアップするのも良い)
+
+&lt;img src="fig/aspredicted.png" width="450"&gt;
+---
+# jpaRmdのインストール
+
+- jpaRmdは，githubからremotesのinstall_github()関数を用いてインストールする(cranには登録されていない)。
+
+
+```r
+# install.packages("remotes")
+remotes::install_github("ykunisato/jpaRmd")
+```
+
+---
+# jpaRmdの使用法
+
+&lt;img src="fig/jparmd1.png" width="600" align="right"&gt;
+File →
+
+New File →
+
+RMarkdown…
+
+---
+
+&lt;img src="fig/jparmd2.png" width="570"  align="right"&gt;
+From Template →
+
+Japanese Psychological Association format{jpaRmd}をクリックして，OK
+
+Nameを好きな名前にする。
+
+---
+# 初knit
+&lt;img src="fig/jparmd3.png" width="570" align="right"&gt;
+フォルダが作成されいくつかのファイルとが配置される。
+
+Rmdファイルが自動に開くので，knitをしてみる。
+---
+&lt;img src="fig/jparmd6.png" width="470" align="right"&gt;
+- こんな感じのPDFが出てきたら成功。
+
+- 最初はtexのパッケージのインストールがあるので，数分かかる。
+
+---
+# 日本語のためにスペルチェックをオフ
+&lt;img src="fig/jparmd4.png" width="530" align="right"&gt;
+最近のRStudioのスペルチェック機能は日本語入力時には不便（英語は便利）
+
+Tools → Global Options...
+
+赤点線で囲われたチェックボックスのチェックを.red[取る]
+---
+
+# 日本語入力のための工夫
+&lt;img src="fig/jparmd5.png" width="580" align="right"&gt;
+
+RStudioのversion 1.3.1093では，１つ目に開いたファイルでは日本語入力ができない呪いがある(理由は不明)
+
+良い解決法はないので，日本語を入力するファイルの前になにか適当なファイルを開いておいて（例の場合はmemo.md），日本語入力する。
+---
+# jpaRmdでResearch Compendium
+
+- set_rc_jpa()関数を使えば，『心理学研究』用のRmdや解析，データを配置するフォルダなども準備される。
+
+- set_rc_jpa()の引数にプロジェクト名を入れて実行（これがディレクトリ名になる）
+
+
+```r
+library(jpaRmd)
+set_rc_jpa("rmarkdown_for_reproducibility")
+```
+
+
+---
+
+# jpaRmdのResearch Compendium
+
+set_rc_jpa("プロジェクト名")を実行すると，プロジェクト名のディレクトリー下に以下のディレクトリーが作られる。
+
+- analysis: 分析用ファイルを置く場所
+- data：データを置く場所
+- function：　分析で使う汎用関数のファイルを置く場所
+- materials：　研究で使ったマテリアルを置く場所
+- paper：　論文原稿を置く場所
+- README.md : 説明を書くファイル
+---
+class: left, middle
+# jpaRmdで自分の論文を書いてみよう！
+---
+
+&lt;img src="fig/jparmd7.png" width="650" align="right"&gt;
+title, subtitle, Abstract, Key wordsを自分用に変更する。
+
+原稿には著者名・所属は不要だが，投稿時には必要
+---
+&lt;img src="fig/jparmd8.png" width="800"&gt;
+
+- 最初に使用するRパッケージをlibrary()関数で読み込む。
+
+- その下から本文を書き始める。
+
+---
+&lt;img src="fig/jparmd9.png" width="800"&gt;
+- PaperpileやCiNii(日本語文献情報)を利用
+---
+&lt;img src="fig/jparmd10.png" width="600"&gt;
+
+ちょっと不満もあるが，いい感じで引用できる。
+---
+&lt;img src="fig/jparmd11.png" width="700"&gt;
+
+『心理学研究』は，25字*32行で1頁800字（余白は3.5cm以上）。その確認用文章。
+---
+&lt;img src="fig/jparmd12.png" width="320" align="right"&gt;
+25字*32行の800字で１ページが構成されることを確認（ご自身の環境においても再現できるか確認ください。Dockerなので再現できるはずですが・・・）
+---
+&lt;img src="fig/jparmd13.png" width="800"&gt;
+
+"#"は，方法，結果，考察などの大見出し
+
+"##"は，参加者や研究手続きなどの中見出し
+
+"**"で挟むと太字になるので，それで小見出しを表現できる
+
+---
+&lt;img src="fig/jparmd14.png" width="600"&gt;
+
+- R Markdownの大見出し，中見出しに対応して，PDFが出力される（この調整は地味に大変だった）。
+---
+&lt;img src="fig/jparmd15.png" width="650" align="right"&gt;
+
+論文内で数値の手による打ち込みとコピペをしない
+
+学生の論文や査読でも，数字が合わないような状況はよくある
+
+.red[r sprintf('%.0f',本文にいれる数値のオブジェクト)]で，Rでデータをひっぱてきて本文に挿入する
+---
+&lt;img src="fig/jparmd14.png" width="600"&gt;
+
+こんな感じで，数値が挿入される。
+
+データが変わると，それに合わせて，本文も書き換わる。
+---
+&lt;img src="fig/jparmd17.png" width="600"&gt;
+
+- 結果も数値もタイピングとコピペをしない。
+- FigureやTableの挿入位置を指定したい場合，.red[”\marginpar{\fbox{Table1}}”]を使う。
+---
+&lt;img src="fig/jparmd16.png" width="600"&gt;
+
+こんな感じで余白に挿入位置の指定がはいる（色々と試して，これが一番『心理学研究』に近かった）。
+---
+&lt;img src="fig/jparmd18.png" width="800"&gt;
+
+- 引用文献をいれたいところで，divで囲われた呪文を追加
+- 脚注は自動ではないので（自動にすると本文のそのページに脚注が入っちゃう），引用文献の後ろに書き込む。
+---
+&lt;img src="fig/jparmd19.png" width="700"&gt;
+- Rで表のデータを作って，kable()でlatex形式の表を出力
+---
+&lt;img src="fig/jparmd20.png" width="800"&gt;
+
+- いい感じですね。
+- LaTeX形式の表を出力すると，自動でTable1から連番が振られます。
+
+---
+- 画像ファイルの挿入は以下のようにする。[]内に図のタイトルを書く。
+
+```
+![How R Markdown works](fig1.png)
+```
+
+.med[※今回はRmdと同じ位置にあるfig1.pngを挿入しているが，場所を指定すれば他のフォルダのファイルも挿入可能(例えば，../analysis/result1.pngも可能)]
+
+- PDFでは以下のように出力される。Table同様，図はFigure1のように連番がつく。
+
+&lt;img src="fig/jparmd21.png" width="650"&gt;
+---
+
+# Rのggplotを挿入する
+
+- R Markdownのチャンクを.red[{r figs, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7,fig.height=4,fig.cap="\\label{fig:figs}Examples of bar plot and scatter plot "}]のようにする（fig.width, fig.height, fig.capは適宜変更）。
+
+
+```r
+# 相関係数の算出で使ったと同じデータを使う
+summary_bfi_fig2 &lt;- summary_bfi_fig %&gt;% 
+   mutate(gender = ifelse(gender=="1", 
+   "Male","Female"))
+p1 &lt;- ggplot(summary_bfi_fig2,　#以降省略
+```
+
+
+---
+# ggplotをAPA風にする
+
+- jtoolsパッケージのtheme_apa()を使うとAPA形式の図を出力できる。p1の方の棒グラフは，長いので省略しますが，以下のようにtheme_apa()を追加すると，論文風の棒グラフになる。
+
+
+```r
+p2 &lt;- ggplot(summary_bfi_fig2,aes(x = Extraversion, y = Neuroticism)) +
+   geom_point() +
+   theme_apa()
+```
+---
+
+&lt;img src="fig/jparmd22.png" width="700"&gt;
+
+- 論文っぽい図が描けた。ggplotが使えるのでさらに魅力的な可視化も可能。
+---
+# 本文はともかく図表の挿入が面倒・・・
+
+- 論文内の数値のミスは，致命的。
+
+- コピペ汚染をできるだけ避けるために，図表の数値をRで直接操作し，それを論文に挿入できるのが理想。
+
+---
+# 未解決の問題
+
+- 引用文献はインデントできてない。日本語文献は適切な順番で並んでいない。
+- APAフォーマットと微妙に違うので（特に日本語），機械的な調整が難しい
+
+→面倒だがPDF出力してからTeXファイルをいじって，以下を実行することで一応解決できる。しかし，美しくない・・・
+
+
+```r
+xelatex("TeXファイル名.tex")
+```
+---
+
+# 引用文献問題解決にむけて
+
+- 日本心理学会の日本語文献形式をAPAにより近づけて，機械が出力しやすいフォーマットにしていく？
+- 『心理学研究』などの日本の雑誌に特化した引用文献処理関数を作成する？
+
+→TeXやPandocに詳しい方は，jpaRmdの開発にご協力を！
+
+&lt;img src="fig/kosugitti.png" width="600"&gt;
+
+---
+## R Markdownをさらに極めたい方へ
+.med[
+- ドキュメント・プレゼンテーション生成(高橋康介著,2014年，共立出版)
+- 再現可能性のすゝめ(高橋康介著,2018年，共立出版)
+- 自然科学研究のためのR入門(江口哲史著,2018年，共立出版)
+- RユーザのためのRStudio[実践]入門(松村優哉・湯谷啓明・紀ノ定保礼・前田和寛著，2018年,技術評論社)
+- R Markdown Cookbook (Yihui Xie, Christophe Dervieux, Emily Riederer, 2020年10月30日, Chapman and Hall/CRC)
+]
+&lt;img src="fig/book.png" width="800"&gt;
+---
+
+#　jpaRmdついての質問タイム
+
+- jpaRmdはちゃんと動作していますか？
+
+- 『心理学研究』への投稿において足りてない点はないでしょうか？
+
+---
+# 引用文献
+.small[
+- Baker, M. (2016). 1,500 scientists lift the lid on reproducibility. Nature, 533(7604), 452–454.
+- Goodman, S. N., Fanelli, D., &amp; Ioannidis, J. P. A. (2016). What does research reproducibility mean? Science Translational Medicine, 8(341), 341ps12.
+- Hardwicke, T. E., Mathur, M. B., MacDonald, K., Nilsonne, G., Banks, G. C., Kidwell, M. C., Hofelich Mohr, A., Clayton, E., Yoon, E. J., Henry Tessler, M., Lenne, R. L., Altman, S., Long, B., &amp; Frank, M. C. (2018). Data availability, reusability, and analytic reproducibility: evaluating the impact of a mandatory open data policy at the journal Cognition. Royal Society Open Science, 5(8), 180448.
+- Iqbal, S. A., Wallach, J. D., Khoury, M. J., Schully, S. D., &amp; Ioannidis, J. P. A. (2016). Reproducible Research Practices and Transparency across the Biomedical Literature. PLoS Biology, 14(1), e1002333.
+- Ioannidis, J. P. A. (2005). Contradicted and initially stronger effects in highly cited clinical research. JAMA: The Journal of the American Medical Association, 294(2), 218–228.
+- Open Science Collaboration. (2015). Estimating the reproducibility of psychological science. Science, 349(6251), aac4716.
+- Stodden, V., Seiler, J., &amp; Ma, Z. (2018). An empirical analysis of journal policy effectiveness for computational reproducibility. Proceedings of the National Academy of Sciences of the United States of America, 115(11), 2584–2589.
+- Wallach, J. D., Boyack, K. W., &amp; Ioannidis, J. P. A. (2018). Reproducible research practices, transparency, and open access data in the biomedical literature, 2015-2017. PLoS Biology, 16(11), e2006930.
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
