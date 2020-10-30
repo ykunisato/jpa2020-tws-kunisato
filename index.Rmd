@@ -278,8 +278,6 @@ class: center
 
 - senshuRmd(https://github.com/ykunisato/senshuRmd )は，専修大学の心理学科の卒論で求められる形式のPDF出力するRMarkdownテンプレート用Rパッケージ
 
-- 開発動機：ゼミ生の書式チェックと卒論提出後にゼミ論集を作る時にLaTeXを教える＆自分が使うのが嫌になった
-
 - ゼミのRstudioサーバーにゼミ生のアカウントをつくって，ゼミ生はこのRmdを更新＆Githubでバージョン管理（出力されたPDFを確認したり，実際にゼミ中に操作する）
 
 - 作成から１年経つが利用しているのは，弊研究室のみ...
@@ -287,9 +285,10 @@ class: center
 # [脱線]事前登録用Rmdテンプレート
 
 - 卒論でも仮説・方法・解析の事前登録できると良い
-- AsPredicted形式のファイルをGitHubでタイムスタンプ付きで保存すれば簡易の事前登録として使える(もちろんOSFにアップするのも良い)
 - [AsPredictedテンプレート用Rmdファイル](https://github.com/ykunisato/AsPredicted_Rmd_template)をゼミ生用に自作
-<img src="fig/aspredicted.png" width="500">
+- AsPredicted形式のファイルをGitHubでタイムスタンプ付きで保存すれば簡易の事前登録として使える(もちろんOSFにアップするのも良い)
+
+<img src="fig/aspredicted.png" width="450">
 ---
 # jpaRmdのインストール
 
@@ -306,7 +305,7 @@ remotes::install_github("ykunisato/jpaRmd")
 <img src="fig/jparmd1.png" width="600" align="right">
 File →
 
-New File」 →
+New File →
 
 RMarkdown…
 
@@ -530,7 +529,7 @@ xelatex("TeXファイル名.tex")
 - 再現可能性のすゝめ(高橋康介著,2018年，共立出版)
 - 自然科学研究のためのR入門(江口哲史著,2018年，共立出版)
 - RユーザのためのRStudio[実践]入門(松村優哉・湯谷啓明・紀ノ定保礼・前田和寛著，2018年,技術評論社)
-- R Markdown Cookbook (Yihui Xie, Christophe Dervieux, Emily Riederer, 2020年10月30日, Chapman and Hall/CRC
+- R Markdown Cookbook (Yihui Xie, Christophe Dervieux, Emily Riederer, 2020年10月30日, Chapman and Hall/CRC)
 ]
 <img src="fig/book.png" width="800">
 ---
