@@ -48,16 +48,6 @@ style_mono_accent(base_color = "#006400",
 )
 ```
 
-# 今日からできる再現可能な論文執筆
-
-1. 再現可能な解析や論文執筆とは？（15分)
-1. RStudioとRmarkdown環境を整える（15分)
-1. Rmarkdownで英語論文を書いてみよう！(30分)
-1. Rmarkdownで日本語論文を書いてみよう！(30分)
-1. スライドも本もウェブサイトも作れるぞ!(15分)
-1. 質疑
-
----
 class: center, middle
 # 1.再現可能な解析や論文執筆とは？
 
@@ -229,14 +219,6 @@ docker run -e PASSWORD=paper -e DISABLE_AUTH=true -p 8787:8787 -v $PWD:/home/rst
 - Githubを活用するとバージョン管理も可能になります( https://kunisatolab.github.io/main/how-to-github.html )
 
 <img src="fig/github.png" width="500">
-
----
-
-# 事前準備ついての質問タイム
-
-- Dockerで解析環境の構築はできましたか？
-
-- Dockerにこだわりすぎる必要はないので，RやRstudioをインストールしてみましょう。
 
 ---
 # 引用文献

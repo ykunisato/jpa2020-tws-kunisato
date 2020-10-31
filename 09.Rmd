@@ -47,17 +47,6 @@ style_mono_accent(base_color = "#006400",
 )
 ```
 
-
-# 今日からできる再現可能な論文執筆
-
-1. 再現可能な解析や論文執筆とは？（15分)
-1. RStudioとRmarkdown環境を整える（15分)
-1. Rmarkdownで英語論文を書いてみよう！(30分)
-1. .red[Rmarkdownで日本語論文を書いてみよう！(30分)]
-1. スライドも本もウェブサイトも作れるぞ!(15分)
-1. 質疑
-
----
 # jpaRmdパッケージ
 
 - rstudioのrticlesは便利だが，日本の心理学系の雑誌には対応していない。
@@ -67,20 +56,7 @@ style_mono_accent(base_color = "#006400",
 - jpaRmdは，「心理学研究」の投稿時に求められる書式をPDFで出力するRMarkdownのテンプレートを提供するRパッケージ
 
 ---
-class: center
 
-# 学科長公認変態的Rパッケージ
-
-<img src="fig/boss1.png" width="600">
-
----
-class: center
-
-# 学科長公認変態的Rパッケージ
-
-<img src="fig/boss2.png" width="600">
-
----
 # [脱線]専修大学心理学科卒論用Rmd
 
 - senshuRmd(https://github.com/ykunisato/senshuRmd )は，専修大学の心理学科の卒論で求められる形式のPDF出力するRMarkdownテンプレート用Rパッケージ
@@ -327,8 +303,6 @@ xelatex("TeXファイル名.tex")
 
 →TeXやPandocに詳しい方は，jpaRmdの開発にご協力を！
 
-<img src="fig/kosugitti.png" width="600">
-
 ---
 ## R Markdownをさらに極めたい方へ
 .med[
@@ -339,11 +313,3 @@ xelatex("TeXファイル名.tex")
 - R Markdown Cookbook (Yihui Xie, Christophe Dervieux, Emily Riederer, 2020年10月30日, Chapman and Hall/CRC)
 ]
 <img src="fig/book.png" width="800">
----
-
-#　jpaRmdついての質問タイム
-
-- jpaRmdはちゃんと動作していますか？
-
-- 『心理学研究』への投稿において足りてない点はないでしょうか？
- 
